@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'auth',
+    'custom_auth',
     'core',
 
 ]
@@ -111,7 +111,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-AUTH_USER_MODEL = 'auth.UserProfile'
+AUTH_USER_MODEL = 'custom_auth.UserProfile'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -130,7 +130,7 @@ ONE_SIGNAL_USER_AUTH_KEY = ""
 BASE_URL = ""
 
 try:
-    from access_client.local_settings import *
+    from core.local_settings import *
 except ImportError as ie:
     pass
 
