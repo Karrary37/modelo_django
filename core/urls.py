@@ -16,7 +16,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
 
-    path('api/auth/', include('auth.api_urls')),
+    path('api/auth/', include('custom_auth.api_urls')),
 
     path('tinymce/', include('tinymce.urls')),
 
