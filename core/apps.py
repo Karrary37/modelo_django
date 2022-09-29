@@ -2,10 +2,10 @@ from django.apps import AppConfig
 
 
 class AuthConfig(AppConfig):
-    name = 'auth'
+    name = 'custom_auth'
     verbose_name = '1. USUÁRIOS'
 
 
 class CoreConfig(AppConfig):
-    name = '$client'
+    name = 'core'
     verbose_name = '2. CORE'
