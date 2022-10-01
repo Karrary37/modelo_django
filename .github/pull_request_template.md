@@ -7,28 +7,18 @@
 
 <h1 align="center"> Título das suas modificações </h1>
 
-# O que foi implementado? 🤔
- Neste espaço, você deverá escrever um resumo do que foi implementado nesse PR, podendo listar libs implementadas e outras informações relevantes para quem estará avaliando seu código. 
+# O que foi feito? 🤔
+ Neste espaço, escreva um resumo do que foi feito nesse PR, podendo listar libs implementadas e outras informações relevantes para quem estará avaliando seu código entenda todo o contexto.
  
-Caso exista, coloque o link da issue relacionada à mudança.
+Caso exista, faça o link da(s) issue(s) relacionada(s) à mudança.
 
-# Tipo de alteração 🛠️ 
-- [ ] 🐞  Correção de Bug 
-- [ ] ✨   Nova funcionalidade
-- [ ]  🚨 Breaking change ( Correção ou funcionalidade que poderá quebrar alguma funcionalidade da aplicação)
-- [ ]  📰 Atualização da documentação
+# Como testar o que foi feito? 🔍 
+Descreva abaixo o passo-a-passo para validar as mudanças. <br>
+Caso exista alguma configuração específica, também coloque na descrição, por exemplo:
+- Cadastrar um usuário
+- Adicionar produto ao carrinho
+- Realizar checkout
 
-# Como você verificou o que foi implementado? 🔍 
-Descreva abaixo os testes que você realizou para validar as suas mudanças. Caso exista alguma configuração específica, também coloque na descrição:
-- [ ] Exemplo Teste 1: Testar o campo de telefone com máscara com os seguintes inputs ((212)21312312, (21)342342-3342), ...)
-- [ ] Teste 2
+# Informações adicionais 🗺️ 
+Anexe aqui: diagramas, screenshots, gifs, vídeos, textos ou quaisquer outros conteúdos que ache relevante. 
 
-# Fluxo das implementações 🗺️ 
-Espaço destinado para o upload dos fluxogramas utilizados na construção do código. (Caso Exista)
-
-
-# Próximos passos🚶‍♀️
-- [ ] Exemplo: Cálculo do valor total do empréstimo e das parcelas
-- [ ] B
-- [ ] C 
-- [ ] D
