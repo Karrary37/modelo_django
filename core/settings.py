@@ -64,6 +64,18 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    os.getenv('DATABASE_NAME1'): {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME_1'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8',
+            'use_unicode': True,
+        },
+    },
 }
 
 # Password validation

@@ -1,0 +1,69 @@
+version: '3.8'
+
+networks:
+  byx-network:
+    external: true
+
+
+services:
+  django:
+    build:
+      dockerfile: Dockerfile.dev
+    container_name: django
+    hostname: django.dev
+    entrypoint: ./entrypoints/entrypoint.django.dev.sh
+    environment:
+        CNAME: core
+    env_file: .env
+    volumes:
+       - ./:/core/app
+    ports:
+      - "8000:80"
+    depends_on:
+      - redis
+      - celery
+      - mysql
+    networks:
+      - byx-network
+
+
+#  celery:
+#    build:
+#      dockerfile: Dockerfile.dev
+#    container_name: celery
+#    hostname: app.dev
+#    entrypoint: ./entrypoints/entrypoint.celery.dev.sh
+#    environment:
+#        CNAME: flower
+#    env_file: .env
+#    ports:
+#      - "5672:80"
+#    networks:
+#      - byx-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    volumes:
+      - mysql-cessao-data:/var/lib/mysql
+    hostname: database.dev
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootpasword"
+      MYSQL_DATABASE: "public"
+    ports:
+      - "3306:3306"
+    networks:
+      - byx-network
+
+#  redis:
+#    image: "redis:latest"
+#    container_name: redis
+#    hostname: redis.dev
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - byx-network
+
+volumes:
+  mysql-cessao-data:
+    driver: local
