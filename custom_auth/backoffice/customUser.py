@@ -4,6 +4,7 @@ from import_export import resources
 # from import_export.admin import ImportExportModelAdmin
 
 from custom_auth.models import UserProfile
+from core.tasks import celery_teste
 
 
 class UserResource(resources.ModelResource):
@@ -71,3 +72,10 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+    def celery_test(self, request, queryset):
+        print('ppppppppp')
+        celery_teste.delay(1)
+        print('nnnnnnnnnn')
+
+    actions = [ celery_test]

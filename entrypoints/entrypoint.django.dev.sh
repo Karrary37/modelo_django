@@ -1,5 +1,10 @@
 #!/bin/bash
 cd app
+echo 'Start workers'
+celery -A core worker -n fast -c 8 -P gevent -l INFO -Q fast &
+celery -A core worker -n medium -c 2 -P gevent -l INFO -Q medium &
+echo 'Start Application - Celery and Flower'
+echo '------------------'
 echo 'Start NGINX'
 service nginx start
 echo '------------------'

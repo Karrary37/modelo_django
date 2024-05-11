@@ -98,6 +98,5 @@ COPY . ${APPLICATIONDIR}
 
 EXPOSE 80
 RUN chmod +x entrypoint.sh
-RUN chmod +x entrypoints/entrypoint.celery.dev.sh
 RUN chmod +x entrypoints/entrypoint.django.dev.sh
 # ENTRYPOINT ["./entrypoint.sh"]
