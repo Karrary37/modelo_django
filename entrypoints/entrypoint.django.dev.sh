@@ -8,12 +8,10 @@ echo 'Start Migrate'
 python3 manage.py migrate
 echo '------------------'
 echo 'Start Collectstatic'
+echo '------------------'
 python3 manage.py collectstatic
 echo 'Start Application - Core'
-newrelic-admin run-program \
-    gunicorn core.wsgi:application \
-        --bind ${GUNICORNADDRESS}:${GUNICORNPORT} \
-        --workers 2 \
-        --threads 4 \
-        --timeout 120 \
-        --reload
+echo '------------------'
+python3 manage.py runserver
+echo 'Start Runserver'
+echo '------------------'
