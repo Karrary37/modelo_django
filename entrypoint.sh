@@ -99,7 +99,6 @@ else
     sleep 2
     echo 'Start Migrate'
     python manage.py migrate
-    python manage.py migrate --database=audit
     echo '------------------'
     echo 'Start Collectstatic'
     python manage.py collectstatic

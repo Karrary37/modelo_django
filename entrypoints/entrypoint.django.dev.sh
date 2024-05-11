@@ -6,7 +6,6 @@ echo '------------------'
 sleep 2
 echo 'Start Migrate'
 python3 manage.py migrate
-python3 manage.py migrate --database=audit
 echo '------------------'
 echo 'Start Collectstatic'
 python3 manage.py collectstatic
