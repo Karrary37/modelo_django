@@ -20,5 +20,4 @@ django-storages==1.13.1
 djangorestframework==3.13.1
 gunicorn==20.1.0
 mysqlclient==2.1.1
-Pillow==8.4.0
 onesignal-sdk==2.0.0
