@@ -21,4 +21,4 @@ Para manter o Docker do projeto original inalterado, foi criado o arquivo docker
 #### Como usar o docker de desenvolvimento
 
 - execute o comando para iniciar o sistema
-<br/>``` docker compose -f docker-compose-dev.yml up -d```
+<br/>```docker compose -f docker-compose-dev.yml up -d```

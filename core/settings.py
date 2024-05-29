@@ -164,6 +164,13 @@ CELERY_ACKS_LATE = True
 CELERYD_PREFETCH_MULTIPLIER = 1
 CELERY_RESULT_EXPIRES = 1 * 60
 
+ELASTIC_CACHE_URL = os.getenv('ELASTIC_CACHE_URL')
+
+RABBITMQ_HOST = os.getenv('RABBITMQ_HOST')
+RABBITMQ_PORT = os.getenv('RABBITMQ_PORT')
+RABBITMQ_USERNAME = os.getenv('RABBITMQ_USERNAME')
+RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD')
+
 try:
     from core.local_settings import *
 except ImportError as ie:

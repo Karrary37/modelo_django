@@ -1,10 +1,15 @@
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 from import_export import resources
-# from import_export.admin import ImportExportModelAdmin
 
-from custom_auth.models import UserProfile
+from core.rabbit.consumer import RabbitmqConsumer, minha_callback
+from core.rabbit.publisher import RabbitmqPublisher, publicar_mensagem_rabbitmq
 from core.tasks import celery_teste
+from custom_auth.models import UserProfile
+from django.contrib import admin
+
+
+# from import_export.admin import ImportExportModelAdmin
 
 
 class UserResource(resources.ModelResource):
@@ -73,9 +78,31 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+    @admin.action(
+        description='Teste no Celery',
+    )
     def celery_test(self, request, queryset):
         print('ppppppppp')
         celery_teste.delay(1)
         print('nnnnnnnnnn')
 
-    actions = [ celery_test]
+    @admin.action(
+        description='Teste no Publisher RabbitMQ',
+    )
+    def test_rabbitmq_publisher(self, request, queryset):
+        rabbitmq_publisher = RabbitmqPublisher()
+        rabbitmq_publisher.send_message({"ola": "mundo"})
+
+    @admin.action(
+        description='Teste no Publisher RabbitMQ 2',
+    )
+    def test_rabbitmq_publisher(self, request, queryset):
+        publicar_mensagem_rabbitmq()
+    @admin.action(
+        description='Teste no Consumer RabbitMQ',
+    )
+    def test_rabbitmq_consumer(self, request, queryset):
+        rabitmq_consumer = RabbitmqConsumer()
+        rabitmq_consumer.start()
+
+    actions = [celery_test, test_rabbitmq_publisher, test_rabbitmq_consumer]

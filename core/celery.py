@@ -5,8 +5,7 @@ import os
 from celery import Celery
 from kombu import Queue
 
-# from core.settings import ELASTIC_CACHE_URL
-ELASTIC_CACHE_URL = 'redis://localhost:6379'
+from core.settings import ELASTIC_CACHE_URL
 
 # Configuração padrão do Django para o programa Celery.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
