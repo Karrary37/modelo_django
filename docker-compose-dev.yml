@@ -17,10 +17,10 @@ services:
 
   django:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: django
     hostname: django.dev
-    entrypoint: ./entrypoints/entrypoint.django.dev.sh
+    entrypoint: ./entrypoint.sh
     environment:
         CNAME: core
     env_file: .env
@@ -37,10 +37,10 @@ services:
 
   celery:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: celery
     hostname: app.dev
-    entrypoint: ./entrypoints/entrypoint.django.dev.sh
+    entrypoint: ./entrypoint.sh
     environment:
       CNAME: flower
     env_file: .env

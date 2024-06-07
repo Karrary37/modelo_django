@@ -95,8 +95,8 @@ COPY --from=build-image ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 COPY . ${APPLICATIONDIR}
+COPY .env /${APPLICATIONDIR}/.env
 
 EXPOSE 80
 RUN chmod +x entrypoint.sh
-RUN chmod +x entrypoints/entrypoint.django.dev.sh
-# ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
