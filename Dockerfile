@@ -95,7 +95,6 @@ COPY --from=build-image ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 COPY . ${APPLICATIONDIR}
-COPY .env /${APPLICATIONDIR}/.env
 
 EXPOSE 80
 RUN chmod +x entrypoint.sh
