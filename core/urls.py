@@ -14,7 +14,7 @@ admin.site.index_title = u'Administração'
 admin.site.site_title = u'Back office'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('backoffice/', admin.site.urls),
     path('', views.index, name='index'),
 
     path('api/auth/', include('custom_auth.api_urls')),
