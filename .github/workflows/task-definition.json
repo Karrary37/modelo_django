@@ -30,13 +30,7 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": [],
-            "secrets": [
-                {
-                  "valueFrom": "arn:aws:secretsmanager:us-east-1:381492111037:secret:DB_HOST-8XQSJ9:DB_HOST::",
-                  "name": "DB_HOST"
-                }
-            ]
+            "systemControls": []
         }
     ],
     "family": "task-definition-modelo-django",
