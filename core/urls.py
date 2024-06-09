@@ -10,7 +10,7 @@ from . import views
 
 admin.autodiscover()
 admin.site.site_header = u'Back office '
-admin.site.index_title = u'Administração'
+admin.site.index_title = f'{DB_HOST}'
 admin.site.site_title = u'Back office'
 
 urlpatterns = [
