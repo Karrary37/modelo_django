@@ -1,8 +1,7 @@
-<img src="https://ravennaareachamber.com/wp-content/uploads/2017/03/your-company-lsiting.png" width=10% align="left" />
-<img src="https://user-images.githubusercontent.com/78767309/190235387-ff0f4419-4734-4ede-86d9-c8a0b17e7a36.png" width=25% align="right"/> 
+[//]: # (<img src="https://ravennaareachamber.com/wp-content/uploads/2017/03/your-company-lsiting.png" width=10% align="left" />)
 
-<br>
-<br>
+[//]: # (<br>)
+[//]: # (<br>)
 <br>
 
 <h1 align="center"> Título das suas modificações </h1>
