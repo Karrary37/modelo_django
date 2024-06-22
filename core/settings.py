@@ -166,10 +166,8 @@ CELERY_RESULT_EXPIRES = 1 * 60
 
 ELASTIC_CACHE_URL = os.getenv('ELASTIC_CACHE_URL')
 
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST')
-RABBITMQ_PORT = os.getenv('RABBITMQ_PORT')
-RABBITMQ_USERNAME = os.getenv('RABBITMQ_USERNAME')
-RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD')
+RABBITMQ_AMQP_URL = os.getenv('RABBITMQ_AMQP_URL')
+RABBITMQ_AMQP_URL = 'amqp://admin:123@rabbitmq:5672'
 
 try:
     from core.local_settings import *
