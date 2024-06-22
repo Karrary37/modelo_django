@@ -15,12 +15,10 @@ echo '------------------'
 echo 'Start Collectstatic'
 echo '------------------'
 python3 manage.py collectstatic
-echo 'Start Application - Core'
 echo '------------------'
-#python3 manage.py runserver
-#echo 'Start Runserver'
+#echo "Starting startconsumer..."
+#python3 manage.py startconsumer
 #echo '------------------'
-
 echo "Starting Gunicorn..."
 exec gunicorn core.wsgi:application \
     --bind 0.0.0.0:8000 \

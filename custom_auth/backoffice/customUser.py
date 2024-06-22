@@ -1,12 +1,11 @@
+from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 from import_export import resources
 
-from core.rabbit.consumer import RabbitmqConsumer, minha_callback
-from core.rabbit.publisher import RabbitmqPublisher, publicar_mensagem_rabbitmq
+from core.rabbit.publisher import RabbitMQPublisher
 from core.tasks import celery_teste
 from custom_auth.models import UserProfile
-from django.contrib import admin
 
 
 # from import_export.admin import ImportExportModelAdmin
@@ -87,22 +86,19 @@ class CustomUserAdmin(UserAdmin):
         print('nnnnnnnnnn')
 
     @admin.action(
-        description='Teste no Publisher RabbitMQ',
+        description='Publisher RabbitMQ',
     )
     def test_rabbitmq_publisher(self, request, queryset):
-        rabbitmq_publisher = RabbitmqPublisher()
-        rabbitmq_publisher.send_message({"ola": "mundo"})
+        publisher = RabbitMQPublisher()
 
-    @admin.action(
-        description='Teste no Publisher RabbitMQ 2',
-    )
-    def test_rabbitmq_publisher(self, request, queryset):
-        publicar_mensagem_rabbitmq()
-    @admin.action(
-        description='Teste no Consumer RabbitMQ',
-    )
-    def test_rabbitmq_consumer(self, request, queryset):
-        rabitmq_consumer = RabbitmqConsumer()
-        rabitmq_consumer.start()
+        publisher.connect()
+        publisher.declare_exchange(exchange_name="data_exchange")
 
-    actions = [celery_test, test_rabbitmq_publisher, test_rabbitmq_consumer]
+        message = {"teste": "teste"}
+        publisher.publish_message(exchange_name="data_exchange", routing_key="", message=message)
+
+
+    def print_teste(ch, method, properties, body):
+        print(f'MESTRINHO | {body}')
+
+    actions = [celery_test, test_rabbitmq_publisher]

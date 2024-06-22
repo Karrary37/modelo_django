@@ -1,45 +1,44 @@
 import pika
+import traceback
 
 
-class RabbitmqConsumer:
-    def __int__(self) -> None:
-        self.__host = "localhost"
-        self.__port = "15670"
-        self.__username = "admin"
-        self.__password = "123"
-        self.__queue = "data_queue"
-        self.__callback = callback
-        self.__channel = self.__create_channel()
+from core.settings import RABBITMQ_AMQP_URL
 
-    def __create_channel(self):
-        connection_parameters = pika.ConnectionParameters(
-            host=self.__host,
-            port=self.__port,
-            credentials=pika.PlainCredentials(
-                username=self.__port,
-                password=self.__password
+
+def printar_teste(ch, method, properties, body):
+    print(f'Consumindo Mensagem | {body}')
+
+
+class RabbitMQConsumer:
+    def __init__(self):
+        try:
+            parameters = pika.URLParameters(RABBITMQ_AMQP_URL)
+            channel = pika.BlockingConnection(parameters).channel()
+            channel.queue_declare(
+                queue="data_exchange",
+                durable=True,
             )
-        )
 
-        channel = pika.BlockingConnection(connection_parameters).channel()
-        channel.queue_declare(
-            queue=self.__queue,
-            durable=True,
-        )
+            channel.exchange_declare(
+                exchange="data_exchange",
+                durable=True,
+            )
+            # Declara a fila
+            queue = channel.queue_declare(
+                queue="data_exchange", durable=True, exclusive=False
+            )
+            # Declara o bind da fila com a exchange
+            channel.queue_bind(
+                exchange="data_exchange",
+                queue=queue.method.queue,
+            )
+            # Declara o consumo da fila
+            channel.basic_consume(
+                queue=queue.method.queue,
+                on_message_callback=printar_teste,
+                auto_ack=True,
+            )
+            channel.start_consuming()
 
-        channel.basic_consumer(
-            queue=self.__queue,
-            auto_ack=True,
-            on_message_callback=self.__callback
-        )
-
-        return channel
-
-    def start(self):
-        print('-----------------------------------------------')
-        print('Ouvindo porta 15670')
-        channel.start_consuming()
-
-
-def minha_callback(ch, method, properties, body):
-    print(body)
+        except Exception as e:
+            print(f'ERRO {traceback.format_exc()} | {e.__traceback__.tb_lineno}')
