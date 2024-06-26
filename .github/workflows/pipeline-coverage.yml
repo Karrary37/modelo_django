@@ -1,4 +1,4 @@
-name: Pre-Commit
+name: Run sonar coverage
 
 on:
   pull_request:

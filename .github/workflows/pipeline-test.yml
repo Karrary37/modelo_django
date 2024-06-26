@@ -1,4 +1,4 @@
-name: Run Django Tests
+name: Run django tests
 
 on:
   pull_request:
