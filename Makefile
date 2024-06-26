@@ -3,4 +3,7 @@ define coverage_teardown
 	coverage html
 	coverage xml
 endef
-$(call coverage_teardown)
+
+test:
+    coverage run --source='.' manage.py test
+	$(call coverage_teardown)
