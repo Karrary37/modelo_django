@@ -17,5 +17,5 @@ jobs:
         with:
           args: >
               -Dsonar.organization=karrary37
-              -Dsonar.projectKey=modelo_django
+              -Dsonar.projectKey=Karrary37_modelo_django
               -Dsonar.python.coverage.reportPaths=coverage.xml

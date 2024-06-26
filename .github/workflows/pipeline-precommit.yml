@@ -2,8 +2,10 @@ name: Run pre-commit hooks
 
 on:
   pull_request:
-    branches:
-      - main 
+    branches: [ develop, release, main ]
+
+  push:
+    branches: [ develop, main ]
 
 jobs:
   pre-commit:
