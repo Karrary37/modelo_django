@@ -8,14 +8,31 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-            fetch-depth: 0
-      - name: SonarCloud Scan
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Especifique a versão do Python que você está usando
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install coverage
+
+      - name: Run tests with coverage
+        run: |
+          coverage run --source='.' manage.py test
+          coverage xml
+
+      - name: Upload coverage report to SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
-            GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-              -Dsonar.organization=karrary37
-              -Dsonar.projectKey=Karrary37_modelo_django
-              -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.organization=karrary37
+            -Dsonar.projectKey=Karrary37_modelo_django
+            -Dsonar.python.coverage.reportPaths=coverage.xml
