@@ -9,4 +9,4 @@ class IndexViewTest(unittest.TestCase):
 
     def test_index_redirects_to_backoffice(self):
         response = self.client.get(reverse('index'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
