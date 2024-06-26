@@ -1,61 +1,61 @@
-#name: Run sonar coverage
-#
-#on:
-#  pull_request:
-#    branches: [ develop, release, main ]
-#
-#  push:
-#    branches: [ develop, main ]
-#
-#jobs:
-#  sonarcloud:
-#    name: SonarCloud
-#    runs-on:
-#      - self-hosted
-#      - staging
-#      - tests
-#    container: python:3.11
-#    steps:
-#      - uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#      - name: Start Redis
-#        run: |
-#          apt update
-#          apt-get install libenchant-2-2 -y
-#          apt-get install redis-server -y
-#          service redis-server start
-#      - name: Start Locale
-#        run: |
-#          apt-get install locales -y
-#          echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
-#          locale-gen pt_BR.UTF-8
-#      - name: Load cached venv
-#        id: cached-dependencies
-#        uses: actions/cache@v3
-#        with:
-#          path: venv
-#          key: venv-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements.testing.txt') }}
-#      - name: Setup venv
-#        if: steps.cached-dependencies.outputs.cache-hit != 'true'
-#        run: |
-#          python -m venv venv
-#          source venv/bin/activate
-#          pip install -r requirements.txt
-#          pip install -r requirements.testing.txt
-#        shell: bash
-#      - name: Run Tests
-#        run: |
-#          source venv/bin/activate
-#          make setup-database-tests
-#          make test
-#        env:
-#          LANG: "pt_BR.UTF-8"
-#          LANGUAGE: "pt_BR:pt"
-#          LC_ALL: "pt_BR.UTF-8"
-#        shell: bash
-#      - name: SonarCloud Scan
-#        uses: SonarSource/sonarcloud-github-action@master
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+name: Run sonar coverage
+
+on:
+  pull_request:
+    branches: [ develop, release, main ]
+
+  push:
+    branches: [ develop, main ]
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on:
+      - self-hosted
+      - staging
+      - tests
+    container: python:3.11
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Start Redis
+        run: |
+          apt update
+          apt-get install libenchant-2-2 -y
+          apt-get install redis-server -y
+          service redis-server start
+      - name: Start Locale
+        run: |
+          apt-get install locales -y
+          echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
+          locale-gen pt_BR.UTF-8
+      - name: Load cached venv
+        id: cached-dependencies
+        uses: actions/cache@v3
+        with:
+          path: venv
+          key: venv-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements.testing.txt') }}
+      - name: Setup venv
+        if: steps.cached-dependencies.outputs.cache-hit != 'true'
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+          pip install -r requirements.testing.txt
+        shell: bash
+      - name: Run Tests
+        run: |
+          source venv/bin/activate
+          make setup-database-tests
+          make test
+        env:
+          LANG: "pt_BR.UTF-8"
+          LANGUAGE: "pt_BR:pt"
+          LC_ALL: "pt_BR.UTF-8"
+        shell: bash
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
