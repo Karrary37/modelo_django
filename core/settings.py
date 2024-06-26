@@ -86,13 +86,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -170,8 +173,8 @@ RABBITMQ_AMQP_URL = os.getenv('RABBITMQ_AMQP_URL')
 RABBITMQ_AMQP_URL = 'amqp://admin:123@rabbitmq:5672'
 
 try:
-    from core.local_settings import *
-except ImportError as ie:
+    from core.local_settings import * # noqa: F403
+except ImportError:
     pass
 
 # Default primary key field type

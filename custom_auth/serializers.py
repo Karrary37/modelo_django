@@ -7,8 +7,10 @@ class UserAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAddress
         fields = (
-            'user', 'name', 'postal_code', 'address', 'address_neighborhood', 'address_number', 'address_complement',
-            'city', 'state', 'is_principal', 'id',)
+            'user', 'name', 'postal_code', 'address',
+            'address_neighborhood', 'address_number',
+            'address_complement', 'city', 'state', 'is_principal', 'id',
+        )
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -17,8 +19,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = (
-            'unique_id', 'name', 'identifier', 'email', 'birth_date', 'phone', 'cpf', 'is_premium',
-            'is_superuser', 'is_staff', 'is_active', 'last_login', 'date_joined', 'user_address', 'device_id')
+            'unique_id', 'name', 'identifier',
+            'email', 'birth_date', 'phone',
+            'cpf', 'is_premium',
+            'is_superuser', 'is_staff',
+            'is_active', 'last_login',
+            'date_joined', 'user_address', 'device_id'
+        )
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -26,7 +33,15 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ['name', 'cpf', 'email', 'phone', 'birth_date', 'password', 'device_id']
+        fields = [
+            'name',
+            'cpf',
+            'email',
+            'phone',
+            'birth_date',
+            'password',
+            'device_id'
+        ]
         extra_kwargs = {
             'password': {'write_only': True}
         }

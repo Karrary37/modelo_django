@@ -1,4 +1,4 @@
-from django.contrib import admin, messages
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 from import_export import resources
@@ -92,10 +92,16 @@ class CustomUserAdmin(UserAdmin):
         publisher = RabbitMQPublisher()
 
         publisher.connect()
-        publisher.declare_exchange(exchange_name="data_exchange")
+        publisher.declare_exchange(
+            exchange_name="data_exchange"
+        )
 
         message = {"teste": "teste"}
-        publisher.publish_message(exchange_name="data_exchange", routing_key="", message=message)
+        publisher.publish_message(
+            exchange_name="data_exchange",
+            routing_key="",
+            message=message
+        )
 
 
     def print_teste(ch, method, properties, body):

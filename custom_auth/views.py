@@ -1,25 +1,23 @@
-import random
-import datetime
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import viewsets, status
-from rest_framework.generics import get_object_or_404
-from rest_framework.views import APIView
-from .models import UserProfile, UserAddress
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
-from rest_framework.response import Response
-from django.contrib.auth import authenticate, login, logout
+from rest_framework.views import APIView
 
-from .serializers import RegistrationSerializer, UserProfileSerializer, UserAddressSerializer
+from .models import UserAddress
+from .serializers import (
+    RegistrationSerializer,
+    UserProfileSerializer,
+    UserAddressSerializer
+)
 
 
 # USER API
@@ -55,9 +53,11 @@ def registration_view(request):
             address_neighborhood = request.data.get("address_neighborhood")
             city = request.data.get("city")
             state = request.data.get("state")
-            UserAddress.objects.create(user=user, postal_code=postal_code, address=address, is_principal=True,
-                                       address_number=address_number, address_complement=address_complement,
-                                       address_neighborhood=address_neighborhood, city=city, state=state)
+            UserAddress.objects.create(
+                user=user, postal_code=postal_code, address=address, is_principal=True,
+                address_number=address_number, address_complement=address_complement,
+                address_neighborhood=address_neighborhood, city=city, state=state
+            )
 
             token = token_obj.key
             data['token'] = token
@@ -77,12 +77,18 @@ def login_view(request):
     device_id = request.data.get("device_id")
 
     if username is None or password is None:
-        return Response({'error': 'Todos os campos são obrigatórios'}, status=HTTP_400_BAD_REQUEST)
+        return Response(
+            {'error': 'Todos os campos são obrigatórios'},
+            status=HTTP_400_BAD_REQUEST
+        )
 
     user = authenticate(username=username, password=password)
 
     if not user:
-        return Response({'error': 'E-mail ou senha não conferem. Tente novamente.'}, status=HTTP_404_NOT_FOUND)
+        return Response(
+            {'error': 'E-mail ou senha não conferem. Tente novamente.'},
+            status=HTTP_404_NOT_FOUND
+        )
 
     identifier = user.identifier
     token, created = Token.objects.get_or_create(user=user)
@@ -111,24 +117,40 @@ def change_user_password(request):
     confirm_new_password = request.data.get("confirm_new_password")
     user_token = request.data.get("token")
 
-    if not old_password or not new_password or not user_token or not confirm_new_password:
-        return Response({'error': 'Todos os campos são obrigatórios'}, status=HTTP_400_BAD_REQUEST)
+    if (
+            not old_password
+            or not new_password
+            or not user_token
+            or not confirm_new_password
+    ):
+        return Response(
+            {'error': 'Todos os campos são obrigatórios'},
+            status=HTTP_400_BAD_REQUEST
+        )
 
     if new_password != confirm_new_password:
-        return Response({'error': 'Confirmação de senha não confere'}, status=HTTP_400_BAD_REQUEST)
+        return Response(
+            {'error': 'Confirmação de senha não confere'},
+            status=HTTP_400_BAD_REQUEST
+        )
 
     token_obj = get_object_or_404(Token, key=user_token)
     current_user = token_obj.user
 
-    authentication = authenticate(username=current_user.identifier, password=old_password)
+    authentication = authenticate(
+        username=current_user.identifier,
+        password=old_password
+    )
 
     if authentication:
         current_user.set_password(new_password)
         current_user.save()
         return Response({}, status=HTTP_200_OK)
     else:
-        return Response({'error': 'Informações incorretas, confira os dados e tente novamente.'},
-                        status=HTTP_400_BAD_REQUEST)
+        return Response(
+            {'error': 'Informações incorretas, confira os dados e tente novamente.'},
+            status=HTTP_400_BAD_REQUEST
+        )
 
 
 @api_view(["POST"])
@@ -148,12 +170,14 @@ def save_address(request):
     city = request.data.get("city", "")
     state = request.data.get("state", "")
 
-    user_address, created = UserAddress.objects.get_or_create(user=user, name=name, postal_code=postal_code,
-                                                              address=address, is_principal=True,
-                                                              address_neighborhood=address_neighborhood,
-                                                              address_number=address_number,
-                                                              address_complement=address_complement, city=city,
-                                                              state=state)
+    user_address, created = UserAddress.objects.get_or_create(
+        user=user, name=name, postal_code=postal_code,
+        address=address, is_principal=True,
+        address_neighborhood=address_neighborhood,
+        address_number=address_number,
+        address_complement=address_complement, city=city,
+        state=state
+    )
     if created:
         return Response({}, status=HTTP_200_OK)
     else:

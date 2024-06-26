@@ -18,17 +18,23 @@ class RabbitMQPublisher:
             self.channel = self.connection.channel()
             print('Connected to RabbitMQ')
         except Exception as e:
-            print(f'Connection error: {traceback.format_exc()} | Line: {e.__traceback__.tb_lineno}')
+            print(f'Connection error: {traceback.format_exc()} |'
+                  f' Line: {e.__traceback__.tb_lineno}')
             raise
 
     def declare_exchange(self, exchange_name, exchange_type='direct', durable=True):
         try:
             if not self.channel:
-                raise Exception("Channel is not established. Call connect() first.")
-            self.channel.exchange_declare(exchange=exchange_name, exchange_type=exchange_type, durable=durable)
+                raise Exception("Channel is not established."
+                                " Call connect() first.")
+            self.channel.exchange_declare(
+                exchange=exchange_name,
+                exchange_type=exchange_type,
+                durable=durable)
             print(f'Exchange {exchange_name} declared')
         except Exception as e:
-            print(f'Exchange declaration error: {traceback.format_exc()} | Line: {e.__traceback__.tb_lineno}')
+            print(f'Exchange declaration error: {traceback.format_exc()} |'
+                  f' Line: {e.__traceback__.tb_lineno}')
             raise
 
     def publish_message(self, exchange_name, routing_key, message):
@@ -44,7 +50,8 @@ class RabbitMQPublisher:
             )
             print('Message published')
         except Exception as e:
-            print(f'Publishing error: {traceback.format_exc()} | Line: {e.__traceback__.tb_lineno}')
+            print(f'Publishing error: {traceback.format_exc()} |'
+                  f' Line: {e.__traceback__.tb_lineno}')
             raise
 
     def close(self):
