@@ -39,8 +39,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
-            -Dsonar.projectKey=your_project_key \
-            -Dsonar.organization=your_organization \
-            -Dsonar.host.url=https://your_sonarqube_server_url \
+            -Dsonar.projectKey=Karrary37_modelo_django \
+            -Dsonar.organization=karrary37 \
+            -Dsonar.host.url=https:https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.python.coverage.reportPaths=coverage.xml
