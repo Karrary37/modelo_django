@@ -5,5 +5,5 @@ define coverage_teardown
 endef
 
 test:
-    coverage run --source='.' manage.py test
+	coverage run --source='.' manage.py test
 	$(call coverage_teardown)
