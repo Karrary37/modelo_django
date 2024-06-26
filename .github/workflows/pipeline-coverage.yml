@@ -10,10 +10,7 @@ on:
 jobs:
   sonarcloud:
     name: SonarCloud
-    runs-on:
-      - self-hosted
-      - staging
-      - tests
+    runs-on: ubuntu-latest
     container: python:3.11
     steps:
       - uses: actions/checkout@v4
