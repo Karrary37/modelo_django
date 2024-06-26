@@ -67,18 +67,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'modelo',
-        'USER': 'admin',
-        'PASSWORD': 'admin123',
-        'HOST': 'database-1.cjqq4oc8aknf.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8',
-            'use_unicode': True,
-        },
-    },
 }
 
 # Password validation
