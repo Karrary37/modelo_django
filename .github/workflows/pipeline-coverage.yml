@@ -1,9 +1,9 @@
-name: CI
+name: Coverage
 
 on:
   pull_request:
     branches:
-      - main  # Ou o nome da branch principal do seu repositório
+      - main  # Ou a branch principal do seu repositório
 
 jobs:
   build:
@@ -29,12 +29,16 @@ jobs:
           coverage run --source='.' manage.py test
           coverage xml
 
-      - name: Upload coverage to SonarQube
+      - name: Download SonarQube Scanner
+        run: |
+          curl -LsS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip -o sonar-scanner.zip
+          unzip sonar-scanner.zip
+
+      - name: Run SonarQube Scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          pip install sonar-scanner
-          sonar-scanner \
+          ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.organization=your_organization \
             -Dsonar.host.url=https://your_sonarqube_server_url \
