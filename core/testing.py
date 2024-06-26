@@ -64,6 +64,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 class DisableMigrations:
@@ -76,7 +77,6 @@ class DisableMigrations:
 
 if 'test' in sys.argv:
     MIGRATION_MODULES = DisableMigrations()
-
 
 DATABASES = {
     'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'testing.sqlite3'},
@@ -119,11 +119,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = "/home/staticfiles/core"
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -172,13 +167,5 @@ ELASTIC_CACHE_URL = os.getenv('ELASTIC_CACHE_URL')
 
 RABBITMQ_AMQP_URL = os.getenv('RABBITMQ_AMQP_URL')
 RABBITMQ_AMQP_URL = 'amqp://admin:123@rabbitmq:5672'
-
-try:
-    from core.local_settings import * # noqa: F403
-except ImportError:
-    pass
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
