@@ -1,0 +1,7 @@
+[run]
+source = django_modelo
+
+[report]
+omit =
+    */tests/*
+    */migrations/*

@@ -1,9 +1,11 @@
-name: Run Django Tests
+name: Run django tests
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [ develop, release, main ]
+
+  push:
+    branches: [ develop, main ]
 
 jobs:
   test:
