@@ -10,6 +10,13 @@ Repositório padrão para criação de projetos Django.
 <br>
 ![RabbitMQ](https://img.shields.io/badge/Rabbitmq-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
 ![Celery](https://img.shields.io/badge/celery-%23a9cc54.svg?style=for-the-badge&logo=celery&logoColor=ddf4a4)
+<br>
+----
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Karrary37_modelo_django&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Karrary37_modelo_django)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Karrary37_modelo_django&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Karrary37_modelo_django)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Karrary37_modelo_django&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Karrary37_modelo_django)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Karrary37_modelo_django&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Karrary37_modelo_django)
+----
 # Contém os seguintes módulos
 * Auth
 * Core
