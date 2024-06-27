@@ -10,10 +10,7 @@ on:
 jobs:
   sonarcloud:
     name: SonarCloud
-    runs-on:
-      - self-hosted
-      - staging
-      - tests
+    runs-on: ubuntu-latest
     container: python:3.11
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +44,6 @@ jobs:
       - name: Run Tests
         run: |
           source venv/bin/activate
-          make setup-database-tests
           make test
         env:
           LANG: "pt_BR.UTF-8"
