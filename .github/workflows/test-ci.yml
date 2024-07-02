@@ -17,4 +17,4 @@ jobs:
           echo "LC_ALL=pt_BR.UTF-8" >> $GITHUB_ENV
 
       - name: Usar minha ação customizada
-        uses: Karrary37/poc-github-action@VS-0.19
+        uses: Karrary37/poc-github-action@VS-0.20
