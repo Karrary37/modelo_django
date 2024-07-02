@@ -1,0 +1,14 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Usar minha ação customizada
+      uses: seu-usuario/seu-repositorio@v1.0.0
+      with:
+        argumento1: 'valor1'
+        argumento2: 'valor2'
