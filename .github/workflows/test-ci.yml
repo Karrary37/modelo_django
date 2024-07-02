@@ -8,7 +8,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Usar minha ação customizada
-      uses: Karrary37/poc-github-action@VS-0.13
-      with:
-        teste-1-message: 'Oi, mundoo!'
-        teste-2-message: 'Olaa, mundo!'
+      uses: Karrary37/poc-github-action@VS-0.14
