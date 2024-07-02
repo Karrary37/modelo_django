@@ -8,4 +8,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Usar minha ação customizada
-      uses: Karrary37/poc-github-action@VS-0.15
+      uses: Karrary37/poc-github-action@VS-0.17
