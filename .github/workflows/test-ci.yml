@@ -1,4 +1,4 @@
-name: Build
+name: Meu Action Exemplo
 
 on: [push]
 
@@ -10,5 +10,5 @@ jobs:
     - name: Usar minha ação customizada
       uses: Karrary37/poc-github-action@master
       with:
-        argumento1: 'valor1'
-        argumento2: 'valor2'
+        teste-1-message: 'Oi, mundo!'
+        teste-2-message: 'Ola, mundo!'
