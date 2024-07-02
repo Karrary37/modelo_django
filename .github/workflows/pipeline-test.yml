@@ -3,10 +3,6 @@ name: Run django tests
 on:
   pull_request:
     branches: [ develop, release, main ]
-
-  push:
-    branches: [ develop, main ]
-
 jobs:
   test:
     runs-on: ubuntu-latest
