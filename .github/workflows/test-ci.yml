@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Usar minha ação customizada
-      uses: seu-usuario/seu-repositorio@v1.0.0
+      uses: Karrary37/poc-github-action@master
       with:
         argumento1: 'valor1'
         argumento2: 'valor2'
