@@ -1,8 +1,6 @@
 name: Run sonar scan
-on:
-  push:
-    branches-ignore:
-      - '*'
+
+on: [push]
 
 jobs:
   DemoSonarCloudSCan:
