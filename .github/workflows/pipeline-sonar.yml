@@ -1,7 +1,12 @@
 name: Run sonar scan
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - release
+      - test-ci
 jobs:
   DemoSonarCloudSCan:
     runs-on: ubuntu-latest
