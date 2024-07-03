@@ -1,6 +1,8 @@
 name: Run sonar scan
 on:
-  workflow_dispatch:
+  push:
+    branches-ignore:
+      - '*'
 
 jobs:
   DemoSonarCloudSCan:
