@@ -8,9 +8,6 @@ from core.tasks import celery_teste
 from custom_auth.models import UserProfile
 
 
-# from import_export.admin import ImportExportModelAdmin
-
-
 class UserResource(resources.ModelResource):
     class Meta:
         model = UserProfile
@@ -81,9 +78,7 @@ class CustomUserAdmin(UserAdmin):
         description='Teste no Celery',
     )
     def celery_test(self, request, queryset):
-        print('ppppppppp')
         celery_teste.delay(1)
-        print('nnnnnnnnnn')
 
     @admin.action(
         description='Publisher RabbitMQ',
@@ -102,9 +97,5 @@ class CustomUserAdmin(UserAdmin):
             routing_key="",
             message=message
         )
-
-
-    def print_teste(ch, method, properties, body):
-        print(f'MESTRINHO | {body}')
 
     actions = [celery_test, test_rabbitmq_publisher]
