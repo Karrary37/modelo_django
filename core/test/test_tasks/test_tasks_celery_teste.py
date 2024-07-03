@@ -1,8 +1,8 @@
-from django.test import TestCase
+import unittest
 from core.tasks import celery_teste
 
 
-class CeleryTestCase(TestCase):
+class CeleryTestCase(unittest.TestCase):
 
     def test_celery_teste(self):
         test_id = 123
