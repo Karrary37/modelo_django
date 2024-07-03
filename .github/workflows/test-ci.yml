@@ -1,0 +1,23 @@
+name: Meu Action Exemplo
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set environment variables
+        run: |
+          echo "GITHUB_TOKEN=${{ secrets.GIT_TOKEN }}" >> $GITHUB_ENV
+          echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" >> $GITHUB_ENV
+          echo "LANG=pt_BR.UTF-8" >> $GITHUB_ENV
+          echo "LANGUAGE=pt_BR:pt" >> $GITHUB_ENV
+          echo "LC_ALL=pt_BR.UTF-8" >> $GITHUB_ENV
+          echo "LC_ALL=pt_BR.UTF-8" >> $GITHUB_ENV
+          echo "ORGANIZATION_SONAR=karrary37" >> $GITHUB_ENV
+          echo "PROJECT_KEY_SONAR=Karrary37_modelo_django" >> $GITHUB_ENV
+
+      - name: Usar minha ação customizada
+        uses: Karrary37/poc-github-action@VS-0.24
