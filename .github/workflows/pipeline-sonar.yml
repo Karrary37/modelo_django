@@ -1,5 +1,4 @@
 name: Run sonar scan
-
 on:
   workflow_dispatch:
   push:
