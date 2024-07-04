@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  DemoSonarCloudSCan:
+  DemoSonarCloudScan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,6 +26,14 @@ jobs:
         run: |
           coverage run --source='.' manage.py test
           coverage xml
+
+      - name: Verify GITHUB_TOKEN and SONAR_TOKEN
+        run: |
+          echo "GITHUB_TOKEN is set"
+          echo "SONAR_TOKEN is set"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Upload coverage report to SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
